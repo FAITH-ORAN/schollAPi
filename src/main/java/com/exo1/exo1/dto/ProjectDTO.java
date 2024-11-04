@@ -12,7 +12,7 @@ public class ProjectDTO {
     private Long id;
     private String name;
     private String description;
-    private Set<Long> userIds = new HashSet<>();
-    private List<Long> taskIds = new ArrayList<>();
+    private Set<UserDTO> users = new HashSet<>();
+    private List<TaskDTO> tasks = new ArrayList<>();
 
 }

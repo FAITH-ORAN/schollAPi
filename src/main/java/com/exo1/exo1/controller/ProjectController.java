@@ -52,19 +52,19 @@ public class ProjectController {
     public ProjectDTO createProject(@RequestBody ProjectDTO projectDTO) {
         Project project = projectMapper.toEntity(projectDTO);
 
-
-        if (projectDTO.getUserIds() != null && !projectDTO.getUserIds().isEmpty()) {
-            Set<User> users = projectDTO.getUserIds().stream()
-                    .map(userId -> userService.findById(userId).orElse(null))
+        if (projectDTO.getUsers() != null && !projectDTO.getUsers().isEmpty()) {
+            Set<User> users = projectDTO.getUsers().stream()
+                    .map(userDto -> userService.findById(userDto.getId()).orElse(null))
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
             project.setUsers(users);
         }
 
-        if (projectDTO.getTaskIds() != null && !projectDTO.getTaskIds().isEmpty()) {
-            List<Task> tasks = projectDTO.getTaskIds().stream()
-                    .map(taskId -> taskService.findById(taskId).orElse(null))
+        if (projectDTO.getTasks() != null && !projectDTO.getTasks().isEmpty()) {
+            List<Task> tasks = projectDTO.getTasks().stream()
+                    .map(taskDto -> taskService.findById(taskDto.getId()).orElse(null))
                     .filter(Objects::nonNull)
+                    .peek(task -> task.setProject(project))
                     .collect(Collectors.toList());
             project.setTasks(tasks);
         }
@@ -73,13 +73,36 @@ public class ProjectController {
         return projectMapper.toDto(createdProject);
     }
 
+
     @PutMapping("/{id}")
     public ResponseEntity<ProjectDTO> updateProject(@PathVariable Long id, @RequestBody ProjectDTO projectDTO) {
-        Optional<Project> existingProject = projectService.findById(id);
-        if (existingProject.isPresent()) {
-            Project projectToUpdate = projectMapper.toEntity(projectDTO);
-            projectToUpdate.setId(id);
-            Project updatedProject = projectService.save(projectToUpdate);
+        Optional<Project> existingProjectOpt = projectService.findById(id);
+        if (existingProjectOpt.isPresent()) {
+            Project existingProject = existingProjectOpt.get();
+            existingProject.setName(projectDTO.getName());
+            existingProject.setDescription(projectDTO.getDescription());
+
+            if (projectDTO.getUsers() != null && !projectDTO.getUsers().isEmpty()) {
+                Set<User> users = projectDTO.getUsers().stream()
+                        .map(userDto -> userService.findById(userDto.getId()).orElse(null))
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toSet());
+                existingProject.setUsers(users);
+            } else {
+                existingProject.getUsers().clear();
+            }
+
+            if (projectDTO.getTasks() != null && !projectDTO.getTasks().isEmpty()) {
+                List<Task> tasks = projectDTO.getTasks().stream()
+                        .map(taskDto -> taskService.findById(taskDto.getId()).orElse(null))
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList());
+                existingProject.setTasks(tasks);
+            } else {
+                existingProject.getTasks().clear();
+            }
+
+            Project updatedProject = projectService.save(existingProject);
             return ResponseEntity.ok(projectMapper.toDto(updatedProject));
         } else {
             return ResponseEntity.notFound().build();
@@ -95,5 +118,4 @@ public class ProjectController {
             return ResponseEntity.notFound().build();
         }
     }
-
 }

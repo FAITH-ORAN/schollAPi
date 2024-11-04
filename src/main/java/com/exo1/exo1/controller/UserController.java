@@ -47,9 +47,9 @@ public class UserController {
     public UserDTO createUser(@RequestBody UserDTO userDTO) {
         User user = userMapper.toEntity(userDTO);
 
-        if (userDTO.getProjectIds() != null && !userDTO.getProjectIds().isEmpty()) {
-            Set<Project> projects = userDTO.getProjectIds().stream()
-                    .map(projectId -> projectService.findById(projectId).orElse(null))
+        if (userDTO.getProjects() != null && !userDTO.getProjects().isEmpty()) {
+            Set<Project> projects = userDTO.getProjects().stream()
+                    .map(projectDto -> projectService.findById(projectDto.getId()).orElse(null))
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
             user.setProjects(projects);
@@ -59,7 +59,6 @@ public class UserController {
         return userMapper.toDto(createdUser);
     }
 
-
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
         Optional<User> existingUserOpt = userService.findById(id);
@@ -68,10 +67,9 @@ public class UserController {
             existingUser.setName(userDTO.getName());
             existingUser.setEmail(userDTO.getEmail());
 
-
-            if (userDTO.getProjectIds() != null && !userDTO.getProjectIds().isEmpty()) {
-                Set<Project> projects = userDTO.getProjectIds().stream()
-                        .map(projectId -> projectService.findById(projectId).orElse(null))
+            if (userDTO.getProjects() != null && !userDTO.getProjects().isEmpty()) {
+                Set<Project> projects = userDTO.getProjects().stream()
+                        .map(projectDto -> projectService.findById(projectDto.getId()).orElse(null))
                         .filter(Objects::nonNull)
                         .collect(Collectors.toSet());
                 existingUser.setProjects(projects);
@@ -86,7 +84,6 @@ public class UserController {
         }
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         if (userService.findById(id).isPresent()) {
@@ -96,5 +93,4 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
-
 }

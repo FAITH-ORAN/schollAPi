@@ -1,7 +1,6 @@
 package com.exo1.exo1.controller;
 
 import com.exo1.exo1.dto.TaskDTO;
-import com.exo1.exo1.enums.TasksStatus;
 import com.exo1.exo1.mapper.TaskMapper;
 import com.exo1.exo1.model.Project;
 import com.exo1.exo1.model.Task;
@@ -51,14 +50,14 @@ public class TaskController {
     public TaskDTO createTask(@RequestBody TaskDTO taskDTO) {
         Task task = taskMapper.toEntity(taskDTO);
 
-        if (taskDTO.getProjectId() != null) {
-            Project project = projectService.findById(taskDTO.getProjectId())
+        if (taskDTO.getProject() != null) {
+            Project project = projectService.findById(taskDTO.getProject().getId())
                     .orElseThrow(() -> new RuntimeException("Project not found"));
             task.setProject(project);
         }
 
-        if (taskDTO.getUserId() != null) {
-            User user = userService.findById(taskDTO.getUserId())
+        if (taskDTO.getUser() != null) {
+            User user = userService.findById(taskDTO.getUser().getId())
                     .orElseThrow(() -> new RuntimeException("User not found"));
             task.setUser(user);
         }
@@ -72,18 +71,17 @@ public class TaskController {
         Optional<Task> existingTaskOpt = taskService.findById(id);
         if (existingTaskOpt.isPresent()) {
             Task existingTask = existingTaskOpt.get();
-
             existingTask.setTitle(taskDTO.getTitle());
+            existingTask.setStatus(taskDTO.getStatus());
 
-
-            if (taskDTO.getProjectId() != null) {
-                Project project = projectService.findById(taskDTO.getProjectId())
+            if (taskDTO.getProject() != null) {
+                Project project = projectService.findById(taskDTO.getProject().getId())
                         .orElseThrow(() -> new RuntimeException("Project not found"));
                 existingTask.setProject(project);
             }
 
-            if (taskDTO.getUserId() != null) {
-                User user = userService.findById(taskDTO.getUserId())
+            if (taskDTO.getUser() != null) {
+                User user = userService.findById(taskDTO.getUser().getId())
                         .orElseThrow(() -> new RuntimeException("User not found"));
                 existingTask.setUser(user);
             }
@@ -94,7 +92,6 @@ public class TaskController {
             return ResponseEntity.notFound().build();
         }
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {

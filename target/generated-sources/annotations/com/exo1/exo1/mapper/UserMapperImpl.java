@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-04T12:01:26+0100",
+    date = "2024-11-04T16:20:21+0100",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.9 (GraalVM Community)"
 )
 @Component
@@ -21,10 +21,11 @@ public class UserMapperImpl implements UserMapper {
 
         UserDTO userDTO = new UserDTO();
 
-        userDTO.setProjectIds( mapProjectsToIds( user.getProjects() ) );
         userDTO.setId( user.getId() );
         userDTO.setName( user.getName() );
         userDTO.setEmail( user.getEmail() );
+
+        userDTO.setProjects( mapProjectsToProjectDTOs(user.getProjects()) );
 
         return userDTO;
     }

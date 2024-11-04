@@ -5,10 +5,10 @@ import lombok.Data;
 
 @Data
 public class TaskDTO {
-
     private Long id;
     private String title;
     private TasksStatus status;
-    private Long projectId;
-    private Long userId;
+    private ProjectDTO project;
+    private UserDTO user;
+
 }
