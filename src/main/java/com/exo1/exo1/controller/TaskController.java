@@ -8,6 +8,9 @@ import com.exo1.exo1.model.User;
 import com.exo1.exo1.service.ProjectService;
 import com.exo1.exo1.service.TaskService;
 import com.exo1.exo1.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +35,11 @@ public class TaskController {
     @Autowired
     private UserService userService;
 
+    @Operation(summary = "Get all tasks", description = "Retrieve a list of all tasks")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful retrieval"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @GetMapping
     public List<TaskDTO> getAllTasks() {
         return taskService.findAll().stream()
@@ -39,13 +47,18 @@ public class TaskController {
                 .collect(Collectors.toList());
     }
 
+    @Operation(summary = "Get task by ID", description = "Retrieve a task by their unique identifier")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Task found"),
+            @ApiResponse(responseCode = "404", description = "Task not found")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<TaskDTO> getTaskById(@PathVariable Long id) {
         Optional<Task> task = taskService.findById(id);
         return task.map(value -> ResponseEntity.ok(taskMapper.toDto(value)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-
+    @Operation(summary = "Create a task", description = "Create a new task with the provided details")
     @PostMapping
     public TaskDTO createTask(@RequestBody TaskDTO taskDTO) {
         Task task = taskMapper.toEntity(taskDTO);
@@ -66,6 +79,7 @@ public class TaskController {
         return taskMapper.toDto(createdTask);
     }
 
+    @Operation(summary = "Update an existing task", description = "Update the details of an existing task")
     @PutMapping("/{id}")
     public ResponseEntity<TaskDTO> updateTask(@PathVariable Long id, @RequestBody TaskDTO taskDTO) {
         Optional<Task> existingTaskOpt = taskService.findById(id);
@@ -93,6 +107,7 @@ public class TaskController {
         }
     }
 
+    @Operation(summary = "Delete a task", description = "Delete a task by their unique identifier")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         if (taskService.findById(id).isPresent()) {

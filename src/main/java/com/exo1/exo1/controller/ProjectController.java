@@ -8,6 +8,9 @@ import com.exo1.exo1.model.User;
 import com.exo1.exo1.service.ProjectService;
 import com.exo1.exo1.service.TaskService;
 import com.exo1.exo1.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,13 +37,22 @@ public class ProjectController {
     @Autowired
     private TaskService taskService;
 
+    @Operation(summary = "Get all projects", description = "Retrieve a list of all projects")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful retrieval"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @GetMapping
     public List<ProjectDTO> getAllProjects() {
         return projectService.findAll().stream()
                 .map(projectMapper::toDto)
                 .collect(Collectors.toList());
     }
-
+    @Operation(summary = "Get project by ID", description = "Retrieve a project by their unique identifier")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User found"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<ProjectDTO> getProjectById(@PathVariable Long id) {
         Optional<Project> project = projectService.findById(id);
