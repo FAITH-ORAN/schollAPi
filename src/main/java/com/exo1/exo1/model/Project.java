@@ -26,9 +26,13 @@ public class Project {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_project",  // Table de jointure
+            name = "user_project",
             joinColumns = @JoinColumn(name = "project_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
+            inverseJoinColumns = @JoinColumn(name = "user_id"),
+            indexes = {
+                    @Index(name = "idx_user_project_user_id", columnList = "user_id"),
+                    @Index(name = "idx_user_project_project_id", columnList = "project_id")
+            }
     )
     private Set<User> users = new HashSet<>();
 
