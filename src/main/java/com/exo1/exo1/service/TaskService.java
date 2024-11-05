@@ -11,4 +11,6 @@ public interface TaskService {
     Optional<Task> findById(Long id);
     Task save(Task task);
     void deleteById(Long id);
+
+    public void updateTask(Long id, String title, String status);
 }

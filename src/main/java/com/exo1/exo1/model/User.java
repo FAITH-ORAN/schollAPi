@@ -21,6 +21,6 @@ public class User {
     private String name;
     private String email;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "users",fetch = FetchType.LAZY)
     private Set<Project> projects = new HashSet<>();
 }

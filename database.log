@@ -44,3 +44,54 @@
 1730801460123|0|statement|select p1_0.user_id,p1_1.id,p1_1.description,p1_1.name from user_project p1_0 join projects p1_1 on p1_1.id=p1_0.project_id where p1_0.user_id=9
 1730801460126|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=1
 1730801460127|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=2
+1730803287500|8|statement|select * from information_schema.sequences
+1730803287541|1|statement|select * from "public"."projects" where 1=0
+1730803287549|0|statement|select * from "public"."users" where 1=0
+1730803287564|0|statement|select * from "public"."projects" where 1=0
+1730803287566|0|statement|select * from "public"."users" where 1=0
+1730803300403|1|statement|select distinct u1_0.id,u1_0.email,u1_0.name,p1_0.user_id,p1_1.id,p1_1.description,p1_1.name from users u1_0 left join user_project p1_0 on u1_0.id=p1_0.user_id left join projects p1_1 on p1_1.id=p1_0.project_id
+1730803300429|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=18
+1730803300431|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=1
+1730803300432|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=20
+1730803300433|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=17
+1730803300435|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=19
+1730803300436|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=16
+1730803300437|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=2
+1730803374563|1|statement|select p1_0.id,p1_0.description,p1_0.name,u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from projects p1_0 left join user_project u1_0 on p1_0.id=u1_0.project_id left join users u1_1 on u1_1.id=u1_0.user_id where p1_0.id=7
+1730803374564|0|commit|
+1730803374566|0|statement|select p1_0.id,p1_0.description,p1_0.name,u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from projects p1_0 left join user_project u1_0 on p1_0.id=u1_0.project_id left join users u1_1 on u1_1.id=u1_0.user_id where p1_0.id=3
+1730803374567|0|commit|
+1730803374591|7|statement|insert into users (email,name) values ('y@google.com','Yac')
+1730803374610|2|commit|
+1730804665318|7|statement|select * from information_schema.sequences
+1730804665356|0|statement|select * from "public"."projects" where 1=0
+1730804665363|0|statement|select * from "public"."users" where 1=0
+1730804665379|0|statement|select * from "public"."projects" where 1=0
+1730804665382|0|statement|select * from "public"."users" where 1=0
+1730804687329|1|statement|select u1_0.id,u1_0.email,u1_0.name,p1_0.user_id,p1_1.id,p1_1.description,p1_1.name from users u1_0 left join user_project p1_0 on u1_0.id=p1_0.user_id left join projects p1_1 on p1_1.id=p1_0.project_id where u1_0.id=6
+1730804687357|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=20
+1730804687360|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=19
+1730804687362|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=18
+1730804687363|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=17
+1730804687390|2|statement|select t1_0.id,t1_0.project_id,t1_0.status,t1_0.title,t1_0.user_id from tasks t1_0 where t1_0.id=3
+1730804687395|0|commit|
+1730804687397|0|statement|select t1_0.id,t1_0.project_id,t1_0.status,t1_0.title,t1_0.user_id from tasks t1_0 where t1_0.id=2
+1730804687398|0|commit|
+1730804687422|2|statement|insert into projects (description,name) values ('A new project','Project sql')
+1730804687445|0|statement|update tasks set project_id=21,status='A_FAIRE',title='Updated Task',user_id=1 where id=3
+1730804687448|0|statement|update tasks set project_id=21,status='A_FAIRE',title='Task 2',user_id=5 where id=2
+1730804687474|0|statement|insert into user_project (project_id,user_id) values (21,6)
+1730804687475|0|commit|
+1730804692371|0|statement|select p1_0.id,p1_0.description,p1_0.name,t1_0.project_id,t1_0.id,t1_0.status,t1_0.title,t1_0.user_id,u2_0.project_id,u2_1.id,u2_1.email,u2_1.name from projects p1_0 left join tasks t1_0 on p1_0.id=t1_0.project_id left join user_project u2_0 on p1_0.id=u2_0.project_id left join users u2_1 on u2_1.id=u2_0.user_id
+1730804699023|0|statement|select p1_0.id,p1_0.description,p1_0.name,t1_0.project_id,t1_0.id,t1_0.status,t1_0.title,t1_0.user_id,u2_0.project_id,u2_1.id,u2_1.email,u2_1.name from projects p1_0 left join tasks t1_0 on p1_0.id=t1_0.project_id left join user_project u2_0 on p1_0.id=u2_0.project_id left join users u2_1 on u2_1.id=u2_0.user_id where p1_0.id=19
+1730804754434|0|statement|select p1_0.id,p1_0.description,p1_0.name,t1_0.project_id,t1_0.id,t1_0.status,t1_0.title,t1_0.user_id,u2_0.project_id,u2_1.id,u2_1.email,u2_1.name from projects p1_0 left join tasks t1_0 on p1_0.id=t1_0.project_id left join user_project u2_0 on p1_0.id=u2_0.project_id left join users u2_1 on u2_1.id=u2_0.user_id where p1_0.id=1
+1730804754438|0|statement|update projects set description='A new project',name='Project Python jupiter' where id=1
+1730804754440|0|statement|delete from user_project where project_id=1
+1730804754441|0|commit|
+1730805336066|8|statement|select * from information_schema.sequences
+1730805336109|0|statement|select * from "public"."projects" where 1=0
+1730805336116|0|statement|select * from "public"."users" where 1=0
+1730805336133|0|statement|select * from "public"."projects" where 1=0
+1730805336135|0|statement|select * from "public"."users" where 1=0
+1730805353553|1|statement|select distinct t1_0.id,p1_0.id,p1_0.description,p1_0.name,t1_0.status,t1_0.title,u1_0.id,u1_0.email,u1_0.name from tasks t1_0 left join users u1_0 on u1_0.id=t1_0.user_id left join projects p1_0 on p1_0.id=t1_0.project_id
+1730805353580|1|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=21

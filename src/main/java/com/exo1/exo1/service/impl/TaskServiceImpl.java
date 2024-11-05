@@ -5,6 +5,7 @@ import com.exo1.exo1.repository.TaskRepository;
 import com.exo1.exo1.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,12 +21,12 @@ public class TaskServiceImpl implements TaskService {
     }
     @Override
     public List<Task> findAll() {
-        return taskRepository.findAll();
+        return taskRepository.findAllTasksWithUserAndProject();
     }
 
     @Override
     public Optional<Task> findById(Long id) {
-        return taskRepository.findById(id);
+        return taskRepository.findTaskByIdWithUserAndProject(id);
     }
 
     @Override
@@ -34,7 +35,13 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @Transactional
+    public void updateTask(Long id, String title, String status) {
+        taskRepository.updateTask(id, title, status);
+    }
+
+    @Override
     public void deleteById(Long id) {
-        taskRepository.deleteById(id);
+        taskRepository.deleteByIdJPQL(id);
     }
 }
