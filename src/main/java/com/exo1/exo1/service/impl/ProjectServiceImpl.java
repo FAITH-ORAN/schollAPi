@@ -4,6 +4,9 @@ import com.exo1.exo1.model.Project;
 import com.exo1.exo1.repository.ProjectRepository;
 import com.exo1.exo1.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,11 +28,13 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    @Cacheable(value = "projects", key = "#id")
     public Optional<Project> findById(Long id) {
         return projectRepository.findProjectByIdWithUsersAndTasks(id);
     }
 
     @Override
+    @CachePut(value = "projects", key = "#result.id")
     public Project save(Project project) {
         return projectRepository.save(project);
     }
@@ -41,6 +46,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    @CacheEvict(value = "projects", key = "#id")
     public void deleteById(Long id) {
         projectRepository.deleteByIdJPQL(id);
     }
