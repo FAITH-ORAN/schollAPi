@@ -4,6 +4,8 @@ import com.exo1.exo1.model.Task;
 import com.exo1.exo1.repository.TaskRepository;
 import com.exo1.exo1.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +22,8 @@ public class TaskServiceImpl implements TaskService {
         this.taskRepository = taskRepository;
     }
     @Override
-    public List<Task> findAll() {
-        return taskRepository.findAllTasksWithUserAndProject();
+    public Page<Task> findAllTasksWithPagination(Pageable pageable) {
+        return taskRepository.findAllTasksWithUserAndProject(pageable);
     }
 
     @Override

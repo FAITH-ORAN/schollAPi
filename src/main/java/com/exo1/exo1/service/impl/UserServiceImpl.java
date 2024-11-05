@@ -4,6 +4,8 @@ import com.exo1.exo1.model.User;
 import com.exo1.exo1.repository.UserRepository;
 import com.exo1.exo1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,8 +23,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAllUsersWithProjects();
+    public Page<User> findAllUsersWithPagination(Pageable pageable) {
+        return userRepository.findAllUsersWithProjects(pageable);
     }
 
     @Override

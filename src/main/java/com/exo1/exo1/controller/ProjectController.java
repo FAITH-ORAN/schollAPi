@@ -14,6 +14,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Objects;
@@ -42,11 +44,11 @@ public class ProjectController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
+
     @GetMapping
-    public List<ProjectDTO> getAllProjects() {
-        return projectService.findAll().stream()
-                .map(projectMapper::toDto)
-                .collect(Collectors.toList());
+    public Page<ProjectDTO> getAllProjects(Pageable pageable) {
+        return projectService.findAllProjectsWithPagination(pageable)
+                .map(projectMapper::toDto); // Map each Project to ProjectDTO
     }
     @Operation(summary = "Get project by ID", description = "Retrieve a project by their unique identifier")
     @ApiResponses(value = {

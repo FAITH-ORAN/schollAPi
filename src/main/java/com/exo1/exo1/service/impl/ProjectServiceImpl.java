@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +25,8 @@ public class ProjectServiceImpl implements ProjectService {
         this.projectRepository = projectRepository;
     }
     @Override
-    public List<Project> findAll() {
-        return projectRepository.findAllProjectsWithUsersAndTasks();
+    public Page<Project> findAllProjectsWithPagination(Pageable pageable) {
+        return projectRepository.findAllProjectsWithUsersAndTasks(pageable);
     }
 
     @Override

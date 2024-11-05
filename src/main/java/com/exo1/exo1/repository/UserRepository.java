@@ -1,6 +1,8 @@
 package com.exo1.exo1.repository;
 
 import com.exo1.exo1.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,7 +18,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     // all users
     @Query("SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.projects")
-    List<User> findAllUsersWithProjects();
+    Page<User> findAllUsersWithProjects(Pageable pageable);
 
     // user by id
     @Query("SELECT u FROM User u LEFT JOIN FETCH u.projects WHERE u.id = :id")

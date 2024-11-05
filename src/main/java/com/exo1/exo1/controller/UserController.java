@@ -7,6 +7,8 @@ import com.exo1.exo1.model.User;
 import com.exo1.exo1.service.ProjectService;
 import com.exo1.exo1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,10 +42,9 @@ public class UserController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping
-    public List<UserDTO> getAllUsers() {
-        return userService.findAll().stream()
-                .map(userMapper::toDto)
-                .collect(Collectors.toList());
+    public Page<UserDTO> getAllUsers(Pageable pageable) {
+        return userService.findAllUsersWithPagination(pageable)
+                .map(userMapper::toDto); // Map each User to UserDTO
     }
 
     @Operation(summary = "Get user by ID", description = "Retrieve a user by their unique identifier")

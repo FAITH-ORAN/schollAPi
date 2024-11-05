@@ -12,6 +12,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,10 +43,9 @@ public class TaskController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping
-    public List<TaskDTO> getAllTasks() {
-        return taskService.findAll().stream()
-                .map(taskMapper::toDto)
-                .collect(Collectors.toList());
+    public Page<TaskDTO> getAllTasks(Pageable pageable) {
+        return taskService.findAllTasksWithPagination(pageable)
+                .map(taskMapper::toDto); // Map each Task to TaskDTO
     }
 
     @Operation(summary = "Get task by ID", description = "Retrieve a task by their unique identifier")

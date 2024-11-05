@@ -63,3 +63,52 @@
 1730818029981|0|statement|select p1_0.id,p1_0.description,p1_0.name,t1_0.project_id,t1_0.id,t1_0.status,t1_0.title,t1_0.user_id,u2_0.project_id,u2_1.id,u2_1.email,u2_1.name from projects p1_0 left join tasks t1_0 on p1_0.id=t1_0.project_id left join user_project u2_0 on p1_0.id=u2_0.project_id left join users u2_1 on u2_1.id=u2_0.user_id
 1730818031788|0|statement|select p1_0.id,p1_0.description,p1_0.name,t1_0.project_id,t1_0.id,t1_0.status,t1_0.title,t1_0.user_id,u2_0.project_id,u2_1.id,u2_1.email,u2_1.name from projects p1_0 left join tasks t1_0 on p1_0.id=t1_0.project_id left join user_project u2_0 on p1_0.id=u2_0.project_id left join users u2_1 on u2_1.id=u2_0.user_id
 1730818033828|0|statement|select p1_0.id,p1_0.description,p1_0.name,t1_0.project_id,t1_0.id,t1_0.status,t1_0.title,t1_0.user_id,u2_0.project_id,u2_1.id,u2_1.email,u2_1.name from projects p1_0 left join tasks t1_0 on p1_0.id=t1_0.project_id left join user_project u2_0 on p1_0.id=u2_0.project_id left join users u2_1 on u2_1.id=u2_0.user_id
+1730818274249|0|statement|select p1_0.id,p1_0.description,p1_0.name,t1_0.project_id,t1_0.id,t1_0.status,t1_0.title,t1_0.user_id,u2_0.project_id,u2_1.id,u2_1.email,u2_1.name from projects p1_0 left join tasks t1_0 on p1_0.id=t1_0.project_id left join user_project u2_0 on p1_0.id=u2_0.project_id left join users u2_1 on u2_1.id=u2_0.user_id
+1730818276284|0|statement|select p1_0.id,p1_0.description,p1_0.name,t1_0.project_id,t1_0.id,t1_0.status,t1_0.title,t1_0.user_id,u2_0.project_id,u2_1.id,u2_1.email,u2_1.name from projects p1_0 left join tasks t1_0 on p1_0.id=t1_0.project_id left join user_project u2_0 on p1_0.id=u2_0.project_id left join users u2_1 on u2_1.id=u2_0.user_id
+1730818349647|7|statement|select * from information_schema.sequences
+1730818349686|0|statement|select * from "public"."projects" where 1=0
+1730818349694|0|statement|select * from "public"."users" where 1=0
+1730818349709|0|statement|select * from "public"."projects" where 1=0
+1730818349711|0|statement|select * from "public"."users" where 1=0
+1730818351522|1|statement|CREATE MATERIALIZED VIEW IF NOT EXISTS project_task_count AS SELECT p.id AS project_id, p.name AS project_name, COUNT(t.id) AS task_count FROM projects p LEFT JOIN tasks t ON t.project_id = p.id GROUP BY p.id, p.name
+1730818358239|1|statement|select p1_0.id,p1_0.description,p1_0.name,t1_0.project_id,t1_0.id,t1_0.status,t1_0.title,t1_0.user_id,u2_0.project_id,u2_1.id,u2_1.email,u2_1.name from projects p1_0 left join tasks t1_0 on p1_0.id=t1_0.project_id left join user_project u2_0 on p1_0.id=u2_0.project_id left join users u2_1 on u2_1.id=u2_0.user_id where p1_0.id=19
+1730818445686|7|statement|select * from information_schema.sequences
+1730818445726|0|statement|select * from "public"."projects" where 1=0
+1730818445734|0|statement|select * from "public"."users" where 1=0
+1730818445752|0|statement|select * from "public"."projects" where 1=0
+1730818445754|0|statement|select * from "public"."users" where 1=0
+1730818447577|2|statement|CREATE MATERIALIZED VIEW IF NOT EXISTS project_task_count AS SELECT p.id AS project_id, p.name AS project_name, COUNT(t.id) AS task_count FROM projects p LEFT JOIN tasks t ON t.project_id = p.id GROUP BY p.id, p.name
+1730818479416|1|statement|select p1_0.id,p1_0.description,p1_0.name,t1_0.project_id,t1_0.id,t1_0.status,t1_0.title,t1_0.user_id,u2_0.project_id,u2_1.id,u2_1.email,u2_1.name from projects p1_0 left join tasks t1_0 on p1_0.id=t1_0.project_id left join user_project u2_0 on p1_0.id=u2_0.project_id left join users u2_1 on u2_1.id=u2_0.user_id where p1_0.id=23
+1730819223799|9|statement|select * from information_schema.sequences
+1730819223840|0|statement|select * from "public"."projects" where 1=0
+1730819223846|0|statement|select * from "public"."users" where 1=0
+1730819223860|0|statement|select * from "public"."projects" where 1=0
+1730819223862|0|statement|select * from "public"."users" where 1=0
+1730819225519|1|statement|CREATE MATERIALIZED VIEW IF NOT EXISTS project_task_count AS SELECT p.id AS project_id, p.name AS project_name, COUNT(t.id) AS task_count FROM projects p LEFT JOIN tasks t ON t.project_id = p.id GROUP BY p.id, p.name
+1730819241634|1|statement|select p1_0.id,p1_0.description,p1_0.name,t1_0.project_id,t1_0.id,t1_0.status,t1_0.title,t1_0.user_id,u2_0.project_id,u2_1.id,u2_1.email,u2_1.name from projects p1_0 left join tasks t1_0 on p1_0.id=t1_0.project_id left join user_project u2_0 on p1_0.id=u2_0.project_id left join users u2_1 on u2_1.id=u2_0.user_id
+1730819241669|0|statement|select count(p1_0.id) from projects p1_0
+1730819590652|8|statement|select * from information_schema.sequences
+1730819590690|0|statement|select * from "public"."projects" where 1=0
+1730819590697|0|statement|select * from "public"."users" where 1=0
+1730819590711|0|statement|select * from "public"."projects" where 1=0
+1730819590713|0|statement|select * from "public"."users" where 1=0
+1730819592415|1|statement|CREATE MATERIALIZED VIEW IF NOT EXISTS project_task_count AS SELECT p.id AS project_id, p.name AS project_name, COUNT(t.id) AS task_count FROM projects p LEFT JOIN tasks t ON t.project_id = p.id GROUP BY p.id, p.name
+1730819596230|1|statement|select distinct u1_0.id,u1_0.email,u1_0.name,p1_0.user_id,p1_1.id,p1_1.description,p1_1.name from users u1_0 left join user_project p1_0 on u1_0.id=p1_0.user_id left join projects p1_1 on p1_1.id=p1_0.project_id
+1730819596275|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=23
+1730819596277|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=2
+1730819596278|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=22
+1730819596280|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=21
+1730819596281|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=20
+1730819596282|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=19
+1730819596283|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=18
+1730819596285|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=17
+1730819596286|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=16
+1730819820532|8|statement|select * from information_schema.sequences
+1730819820571|0|statement|select * from "public"."projects" where 1=0
+1730819820578|0|statement|select * from "public"."users" where 1=0
+1730819820592|0|statement|select * from "public"."projects" where 1=0
+1730819820594|0|statement|select * from "public"."users" where 1=0
+1730819822346|1|statement|CREATE MATERIALIZED VIEW IF NOT EXISTS project_task_count AS SELECT p.id AS project_id, p.name AS project_name, COUNT(t.id) AS task_count FROM projects p LEFT JOIN tasks t ON t.project_id = p.id GROUP BY p.id, p.name
+1730819826208|4|statement|select distinct t1_0.id,p1_0.id,p1_0.description,p1_0.name,t1_0.status,t1_0.title,u1_0.id,u1_0.email,u1_0.name from tasks t1_0 left join users u1_0 on u1_0.id=t1_0.user_id left join projects p1_0 on p1_0.id=t1_0.project_id offset 0 rows fetch first 20 rows only
+1730819826230|1|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=1
+1730819826231|0|statement|select u1_0.project_id,u1_1.id,u1_1.email,u1_1.name from user_project u1_0 join users u1_1 on u1_1.id=u1_0.user_id where u1_0.project_id=23
